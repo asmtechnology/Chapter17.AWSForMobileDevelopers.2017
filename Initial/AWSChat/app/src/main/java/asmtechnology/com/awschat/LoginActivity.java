@@ -88,49 +88,55 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void displaySuccessMessage() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Login succesful!");
-        builder.setTitle("Success");
-        builder.setCancelable(false);
 
-        builder.setPositiveButton(
-                "Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        displayHomeActivity();
-                    }
-                });
-
-        final AlertDialog alert = builder.create();
+        final Context context = this;
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Login succesful!");
+                builder.setTitle("Success");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                displayHomeActivity();
+                            }
+                        });
+
+                final AlertDialog alert = builder.create();
                 alert.show();
             }
         });
     }
 
-    private void displayErrorMessage(Exception exception) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(exception.getMessage());
-        builder.setTitle("Error");
-        builder.setCancelable(false);
+    private void displayErrorMessage(final Exception exception) {
 
-        builder.setPositiveButton(
-                "Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        final AlertDialog alert = builder.create();
+        final Context context = this;
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage(exception.getMessage());
+                builder.setTitle("Error");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                final AlertDialog alert = builder.create();
+
                 alert.show();
             }
         });
